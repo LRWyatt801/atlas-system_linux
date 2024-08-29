@@ -1,3 +1,6 @@
+# Custom ignores
+*main.c
+
 # Prerequisites
 *.d
 
