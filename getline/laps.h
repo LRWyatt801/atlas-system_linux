@@ -1,8 +1,7 @@
-#include <stddef.h>
-
 #ifndef LAPS_H
 #define LAPS_H
 
+#include <stddef.h>
 /* Struct */
 
 /**
