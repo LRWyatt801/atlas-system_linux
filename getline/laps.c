@@ -82,8 +82,8 @@ void free_bst(car_node_t *root)
 	if (root != NULL)
 	{
 		free_bst(root->car_left);
-		free(root);
 		free_bst(root->car_right);
+		free(root);
 	}
 }
 
