@@ -31,5 +31,6 @@ void race_state(int *id, size_t size);
 car_node_t *create_car(int car_id);
 car_node_t *car_update(int car_id, car_node_t *root);
 void print_race(car_node_t *root);
+void free_bst(car_node_t *root);
 
 #endif

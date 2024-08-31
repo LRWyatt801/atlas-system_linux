@@ -71,6 +71,23 @@ void print_race(car_node_t *root)
 }
 
 /**
+ * free_bst - frees a binary search tree
+ * @root: pointer to root node
+ *
+ * Return: n/a
+**/
+
+void free_bst(car_node_t *root)
+{
+	if (root != NULL)
+	{
+		free_bst(root->car_left);
+		free(root);
+		free_bst(root->car_right);
+	}
+}
+
+/**
  * race_state - keeps track of a race between several cars
  * @id: pointer to an array of car identifiers
  * @size: size of array for id
@@ -83,9 +100,11 @@ void race_state(int *id, size_t size)
 	size_t i = 0;
 	static car_node_t *root;
 
+	/* if size is 0 then free tree */
 	if (size == 0)
 	{
-		/* free everything */
+		free_bst(root);
+		exit(0);
 	}
 
 	/* iterate through id list */
