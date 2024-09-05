@@ -2,22 +2,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 char *_getline(const int fd)
 {
-	char *buffer;
-	size_t read_bytes;
+	static char *buffer;
+	static size_t size;
+	size_t len = 0;
+	char *nxtlineptr = NULL;
+	char *line = NULL;
+	static int calls;
 
-	buffer = malloc(READ_SIZE);
-	if (!buffer)
-		return(NULL);
-	
-	read_bytes = read(fd, buffer, READ_SIZE);
-	if (read_bytes <= 0)
+	printf("%d\n", ++calls);
+	printf("%p\n", (void*)&buffer);
+	/* read file if buffer is empty */
+	// if (buffer == NULL)
+	// {
+		buffer = malloc(sizeof(char) * READ_SIZE);
+		if (!buffer)
+			return(NULL);
+
+		size = read(fd, buffer, READ_SIZE);
+		if (size <= 0)
+		{
+			free(buffer);
+			return(NULL);
+		}
+		buffer[size] = '\0';
+	// }
+
+	/* parse line */
+	nxtlineptr = buffer;
+	while(*nxtlineptr != '\n')
 	{
-		free(buffer);
-		return(NULL);
+		nxtlineptr++;
+		len++;
 	}
+	line = strndup(buffer, len);
+	line[len] = '\0';
 
-	return(buffer);
+	/* move buffer */
+	size -= len * sizeof(char);
+
+	return(line);
 }
