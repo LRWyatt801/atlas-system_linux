@@ -1,5 +1,5 @@
 # Custom ignores
-*main.c
+*-main.c
 
 # Prerequisites
 *.d
