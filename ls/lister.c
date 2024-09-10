@@ -67,6 +67,6 @@ void close_dir(dir_lister_t *parser)
 		return;
 
 	closedir(parser->directory);
-	memset(parser, 0, sizeof(*parser));
+	free(parser);
 	return;
 }
