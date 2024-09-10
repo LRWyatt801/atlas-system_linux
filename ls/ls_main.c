@@ -12,5 +12,6 @@ int main(void)
     directory_lister_init(&parser, directory_path);
 
     print_dir(&parser);
+    close_dir(&parser);
     return(0);
 }
