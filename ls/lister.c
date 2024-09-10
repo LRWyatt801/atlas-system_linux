@@ -33,11 +33,10 @@ int print_dir(dir_lister_t *parser)
 
 	while (next_entry(parser))
 	{
-		if (parser->stop == 0)
+		if (*parser->current_entry->d_name != '.')
 			printf("%s ", parser->current_entry->d_name);
-		else
-			printf("%s\n", parser->current_entry->d_name);
 	}
+	printf("\n");
 
 	return(0);
 }
