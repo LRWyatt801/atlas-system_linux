@@ -25,7 +25,6 @@ typedef struct dir_lister_s
 
 /* LIST_MAIN */
 
-int main(int argc, char **argv);
 
 /* LISTER */
 
