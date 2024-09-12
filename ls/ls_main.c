@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define IS_REG(mode) (((mode) & S_IFMT) == S_IFREG)
+
 /**
  * main - entry point for 'ls' program
  * @argc: number CL inputs
@@ -16,6 +18,7 @@ int main(int argc, char **argv)
 {
 	dir_lister_t parser;
 	const char *directory_path = NULL;
+	struct stat path_info;
 
 	/* if no directory path input is given default to '.'/current dir */
 	if (argc == 1)
@@ -23,6 +26,16 @@ int main(int argc, char **argv)
 	/* otherwise use directory path input */
 	else
 		directory_path = argv[1];
+	
+	if (lstat(directory_path, &path_info) == -1)
+		return (EXIT_FAILURE);
+	
+	/* check for file or dir */
+	if (IS_REG(path_info.st_mode))
+	{
+		printf("%s\n", directory_path);
+		return (EXIT_SUCCESS);
+	}
 
 	directory_lister_init(&parser, directory_path);
 

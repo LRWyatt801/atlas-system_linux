@@ -2,6 +2,7 @@
 #define _LIST_H
 
 #include <dirent.h>
+#include <sys/stat.h>
 
 /****** STRUCTS ******/
 
@@ -16,6 +17,7 @@
 typedef struct dir_lister_s
 {
 	DIR *directory;
+	struct stat *path_info;
 	const char *path;
 	struct dirent *current_entry;
 	int stop;
