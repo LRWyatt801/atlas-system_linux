@@ -28,7 +28,10 @@ int main(int argc, char **argv)
 		directory_path = argv[1];
 	
 	if (lstat(directory_path, &path_info) == -1)
+	{
+		fprintf(stderr, "No such file or directory\n");
 		return (EXIT_FAILURE);
+	}
 	
 	/* check for file or dir */
 	if (IS_REG(path_info.st_mode))
@@ -37,7 +40,12 @@ int main(int argc, char **argv)
 		return (EXIT_SUCCESS);
 	}
 
-	directory_lister_init(&parser, directory_path);
+	if (directory_lister_init(&parser, directory_path) == -1)
+	{
+		fprintf(stderr, "Failure to open directory '%s'\n",
+				directory_path);
+		return (EXIT_FAILURE);
+	}
 
 	print_dir(&parser);
 	close_dir(&parser);
