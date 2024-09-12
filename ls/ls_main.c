@@ -29,7 +29,8 @@ int main(int argc, char **argv)
 	
 	if (lstat(directory_path, &path_info) == -1)
 	{
-		fprintf(stderr, "No such file or directory\n");
+		fprintf(stderr, "%s: cannot access %s: No such file or directory\n",
+				argv[0], directory_path);
 		return (EXIT_FAILURE);
 	}
 	
