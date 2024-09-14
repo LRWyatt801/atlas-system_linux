@@ -4,6 +4,12 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
+/****** MACROS ******/
+
+#define ISFILE 128
+#define ISDIR 129
+#define FILEERR 130
+
 /****** STRUCTS ******/
 
 /**
@@ -35,5 +41,9 @@ int directory_lister_init(dir_lister_t *parser,
 int print_dir(dir_lister_t *parser);
 struct dirent *next_entry(dir_lister_t *parser);
 void close_dir(dir_lister_t *parser);
+
+/* file_manager */
+
+int check_file_type(const char *path);
 
 #endif
