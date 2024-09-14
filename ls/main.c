@@ -39,15 +39,9 @@ int main(int argc, char **argv)
 		filetype = check_file_type(&parser, directory_path);
 		if (filetype == ISFILE)
 			continue;
-		else if (filetype == FILEERR)
-			return (EXIT_FAILURE);
 
 		if (directory_lister_init(&parser, directory_path) == -1)
-		{
-			fprintf(stderr, "Failure to open directory '%s'\n",
-					directory_path);
-			return (EXIT_FAILURE);
-		}
+			error_handler(ERR_FAILURE_TO_OPEN_DIR, directory_path);
 
 		print_dir(&parser);
 		close_dir(&parser);
