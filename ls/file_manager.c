@@ -10,14 +10,13 @@
  * Return: 'ISFILE', 'ISDIR', or 'FILEERR'
  */
 
-int check_file_type(const char *path)
+int check_file_type(dir_lister_t *parser, const char *path)
 {
 	struct stat path_info;
 
 	if (lstat(path, &path_info) == -1)
 	{
-		fprintf(stderr, "%s: cannot access %s: No such file or directory\n",
-				path, path);
+		error_handler(ERR_FILE_NOT_FOUND, path, parser->program_name);
 		return (FILEERR);
 	}
 

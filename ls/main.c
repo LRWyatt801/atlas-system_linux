@@ -18,6 +18,8 @@ int main(int argc, char **argv)
 	const char *directory_path = NULL;
 	int filetype = 0;
 
+	parser.program_name = argv[0];
+
 	while (argv)
 	{
 		/* if no directory is given set dirctory_path to '.'/current dir */
@@ -34,7 +36,7 @@ int main(int argc, char **argv)
 		if (directory_path == NULL)
 			break;
 
-		filetype = check_file_type(directory_path);
+		filetype = check_file_type(&parser, directory_path);
 		if (filetype == ISFILE)
 			continue;
 		else if (filetype == FILEERR)
