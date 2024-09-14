@@ -15,6 +15,7 @@
 /**
  * struct dir_lister_s - Iterator for parsing 'DIR' stream
  * @directory: Pointer to 'DIR' instance
+ * @path_info: stores information given by lstat
  * @path: Path to directory in file system
  * @current_entry: Pointer to current 'struct dirent'
  * @stop: int flag to indicate directory entries have been exhausted
