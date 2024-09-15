@@ -23,13 +23,14 @@ int error_handler(errorCode_t error, ...)
 		fprintf(stderr, "%s: cannot access %s: No such file or directory\n",
 				va_arg(arg, char *), va_arg(arg, char *));
 		break;
-	case ERR_FAILURE_TO_OPEN_DIR:
-		fprintf(stderr, "Failure to open directory '%s'\n",
-				va_arg(arg, char *));
-		break;
-	case ERR_PERM_DENIED:
-		fprintf(stderr, "%s: cannot access %s: Permission denied\n",
-				va_arg(arg, char *), va_arg(arg, char *));
+
+	case ERR_CANNOT_ACCESS_DIR:
+		if (errno = 2)
+			fprintf(stderr, "%s: cannot access %s: No such file or directory\n",
+					va_arg(arg, char *), va_arg(arg, char *));
+		else if (errno = 13)
+			fprintf(stderr, "%s: cannot access %s: Permission denied\n",
+					va_arg(arg, char *), va_arg(arg, char *));
 
 	default:
 		break;
