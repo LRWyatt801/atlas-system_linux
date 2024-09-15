@@ -28,6 +28,7 @@ int check_file_type(dir_lister_t *parser, const char *path)
 	}
 	else if ((path_info.st_mode & __S_IFMT) == __S_IFDIR)
 		return (ISDIR);
-
+	else if ((path_info.st_mode & (S_IRWXU | S_IRWXG | S_IRWXO)) == 0)
+		error_handler(ERR_PERM_DENIED, path, parser->program_name);
 	return (0);
 }

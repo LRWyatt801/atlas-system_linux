@@ -101,4 +101,3 @@ void close_dir(dir_lister_t *parser)
 
 	closedir(parser->directory);
 }
-

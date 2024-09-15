@@ -27,6 +27,9 @@ int error_handler(errorCode_t error, ...)
 		fprintf(stderr, "Failure to open directory '%s'\n",
 				va_arg(arg, char *));
 		break;
+	case ERR_PERM_DENIED:
+		fprintf(stderr, "%s: cannot access %s: Permission denied\n",
+				va_arg(arg, char *), va_arg(arg, char *));
 
 	default:
 		break;
