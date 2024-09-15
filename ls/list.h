@@ -28,8 +28,12 @@ typedef struct dir_lister_s
 	struct stat *path_info;
 	const char *program_name;
 	const char *path;
+	char **dirs;
+	unsigned int flags;
+	int num_dirs;
 	struct dirent *current_entry;
 	int stop;
+	int args_stop;
 } dir_lister_t;
 
 /**
