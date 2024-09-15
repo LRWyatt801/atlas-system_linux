@@ -42,8 +42,7 @@ typedef struct dir_lister_s
 typedef enum errors
 {
 	ERR_FILE_NOT_FOUND,
-	ERR_PERM_DENIED,
-	ERR_FAILURE_TO_OPEN_DIR
+	ERR_CANNOT_ACCESS_DIR
 } errorCode_t;
 
 /****** PROTOTYPES ******/

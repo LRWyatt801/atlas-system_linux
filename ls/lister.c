@@ -1,5 +1,6 @@
 #include "list.h"
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -25,7 +26,7 @@ int directory_lister_init(dir_lister_t *parser,
 	dir = opendir(path);
 
 	if (!dir)
-		return (-1);
+		error_handler(ERR_CANNOT_ACCESS_DIR, path, parser->program_name);
 
 	parser->directory = dir;
 	parser->path = path;
