@@ -31,6 +31,12 @@ int error_handler(errorCode_t error, ...)
 		else if (errno = 13)
 			fprintf(stderr, "%s: cannot access %s: Permission denied\n",
 					va_arg(arg, char *), va_arg(arg, char *));
+		break;
+
+	case ERR_FAILURE_TO_OPEN_DIR:
+		fprintf(stderr, "%s: cannot access %s: No such file or directory\n",
+				va_arg(arg, char *), va_arg(arg, char *));
+		break;
 
 	default:
 		break;

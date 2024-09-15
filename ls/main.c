@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 			continue;
 
 		if (directory_lister_init(&parser, directory_path) == -1)
-			error_handler(ERR_FAILURE_TO_OPEN_DIR, directory_path);
+			error_handler(ERR_FAILURE_TO_OPEN_DIR, directory_path, parser.program_name);
 		if (argc > 2)
 			printf("%s: \n", directory_path);
 		print_dir(&parser);
