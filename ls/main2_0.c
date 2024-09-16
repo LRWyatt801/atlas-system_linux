@@ -83,10 +83,11 @@ int main(int argc, char **argv)
 			else
 				directory_path = argv[2];
 		}
-		print_single_dir(&parser, directory_path);
+		if (print_single_dir(&parser, directory_path) == -1)
+			return (EXIT_FAILURE);
 	}
-	else
-		print_multi_input_dirs(&parser, argc, argv);
+	else if (print_multi_input_dirs(&parser, argc, argv) == -1)
+		return (EXIT_FAILURE);
 
 	return (EXIT_SUCCESS);
 }

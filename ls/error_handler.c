@@ -37,5 +37,5 @@ int error_handler(errorCode_t error, ...)
 	default:
 		break;
 	}
-	exit(EXIT_FAILURE);
+	return (-1);
 }
