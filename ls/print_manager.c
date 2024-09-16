@@ -45,6 +45,7 @@ int print_multi_input_dirs(dir_lister_t *parser,
 		if (directory_lister_init(parser, input_path) == -1)
 		{
 			error_handler(ERR_FAILURE_TO_OPEN_DIR, input_path, parser->program_name);
+			close_dir(parser);
 			continue;
 		}
 		printf("%s:\n", input_path);
