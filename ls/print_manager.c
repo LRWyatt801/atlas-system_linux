@@ -28,6 +28,7 @@ int print_multi_input_dirs(dir_lister_t *parser,
 						   int argc, char **argv)
 {
 	const char *input_path = NULL;
+	int filetype;
 	int i;
 
 	for (i = 1; i < argc; i++)
@@ -36,7 +37,10 @@ int print_multi_input_dirs(dir_lister_t *parser,
 			input_path = argv[i];
 		else /* if input is flag continue */
 			continue;
-		if (check_file_type(parser, input_path) != ISDIR)
+		filetype = check_file_type(parser, input_path);
+		if (filetype == ISFILE)
+			continue;
+		else if (filetype == FILEERR)
 			continue;
 		if (directory_lister_init(parser, input_path) == -1)
 		{
