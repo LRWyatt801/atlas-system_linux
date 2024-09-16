@@ -9,6 +9,11 @@
 #define ISFILE 128
 #define ISDIR 129
 #define FILEERR 130
+#define ONEPERLINE 1
+#define ALLHIDDEN 2
+#define ALLNOTCURPREV 4
+#define LONGFORMAT 8
+#define MULTIPLEDIRS 16
 
 /****** STRUCTS ******/
 
@@ -69,5 +74,11 @@ int check_file_type(dir_lister_t *parser, const char *path);
 /* ERROR_HANDLER */
 
 int error_handler(errorCode_t error, ...);
+
+/* PRINT_MANAGER */
+
+int print_single_dir(dir_lister_t *parser, const char *path);
+int print_multi_input_dirs(dir_lister_t *parser,
+						   int argc, char **argv);
 
 #endif

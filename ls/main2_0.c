@@ -24,19 +24,19 @@ void set_flags(dir_lister_t *parser, int argc, char **args)
 				switch (args[i][pos])
 				{
 				case '1':
-					parser->flags |= 1; /* 00000001 */
+					parser->flags |= 1; /* 00000001 = 1*/
 					break;
 
 				case 'a':
-					parser->flags |= 1 << 1; /* 00000010 */
+					parser->flags |= 1 << 1; /* 00000010 = 2*/
 					break;
 
 				case 'A':
-					parser->flags |= 1 << 2; /* 00000100 */
+					parser->flags |= 1 << 2; /* 00000100 = 4 */
 					break;
 
 				case 'l':
-					parser->flags |= 1 << 3; /* 00001000 */
+					parser->flags |= 1 << 3; /* 00001000  = 8 */
 					break;
 
 				default:
@@ -49,8 +49,9 @@ void set_flags(dir_lister_t *parser, int argc, char **args)
 			parser->num_dirs += 1;
 	}
 	parser->num_dirs -= 1; /* subtract one for program name */
-	if (parser->num_dirs > 1)
-		parser->flags |= 1 << 4; /* 00010000 */
+
+	if (parser->num_dirs > 1)	 /* flag for multiple dirs input*/
+		parser->flags |= 1 << 4; /* 00010000 = 16 */
 }
 
 /**
@@ -64,53 +65,28 @@ void set_flags(dir_lister_t *parser, int argc, char **args)
 int main(int argc, char **argv)
 {
 	dir_lister_t parser;
-	const char *directory_path = NULL;
-	int filetype = 0;
 
 	parser.program_name = argv[0];
 	set_flags(&parser, argc, argv);
 
-	while (argv)
+	if (parser.flags < MULTIPLEDIRS) /* check for multiple directory input*/
 	{
+		const char *directory_path = NULL;
+
 		/* if no directory is given set dirctory_path to '.'/current dir */
-		if (argc == 1)
-		{
+		if (parser.num_dirs == 0)
 			directory_path = ".";
-			argv = NULL;
-		}
-		else if (parser.num_dirs == 1)
+		else
 		{
 			if (*argv[1] != '-')
 				directory_path = argv[1];
 			else
 				directory_path = argv[2];
-			parser.args_stop = 1;
 		}
-		else
-		{
-			++argv;
-			directory_path = *argv;
-		}
-		if (directory_path == NULL)
-			break;
-
-		filetype = check_file_type(&parser, directory_path);
-		if (filetype == ISFILE && !parser.args_stop)
-			continue;
-		else if (filetype == ISFILE && parser.args_stop)
-			break;
-
-		if (directory_lister_init(&parser, directory_path) == -1)
-			error_handler(ERR_FAILURE_TO_OPEN_DIR, directory_path, parser.program_name);
-		if (parser.num_dirs > 1)
-			printf("%s: \n", directory_path);
-		print_dir(&parser);
-		close_dir(&parser);
-		if (parser.num_dirs > 1)
-			printf("\n");
-		printf("%d\n", parser.flags);
-		if (parser.args_stop)
-			break;
+		print_single_dir(&parser, directory_path);
 	}
+	else
+		print_multi_input_dirs(&parser, argc, argv);
+
 	return (EXIT_SUCCESS);
 }
