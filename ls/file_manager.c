@@ -5,6 +5,8 @@
 
 /**
  * check_file_type - checks the type (REG/DIR) of input: 'path'
+ * @parser: pointer to dir_lister_t struct, contains pointers to DIR
+ *			and current_entry
  * @path: pointer to the given path of file/dir
  *
  * Return: 'ISFILE', 'ISDIR', or 'FILEERR'

@@ -23,6 +23,8 @@
  * @path_info: stores information given by lstat
  * @program_name: name of program being run
  * @path: Path to directory in file system
+ * @flags: a bit map of given CL input flags
+ * @num_dirs: number of given CL input directories
  * @current_entry: Pointer to current 'struct dirent'
  * @stop: int flag to indicate directory entries have been exhausted
  */
@@ -33,18 +35,16 @@ typedef struct dir_lister_s
 	struct stat *path_info;
 	const char *program_name;
 	const char *path;
-	char **dirs;
 	unsigned int flags;
 	int num_dirs;
 	struct dirent *current_entry;
 	int stop;
-	int args_stop;
 } dir_lister_t;
 
 /**
  * enum errors - list of different error codes
  * @ERR_FILE_NOT_FOUND: error for 'file not found'
- * @ERR_PERM_DENIED: error for 'permission denied'
+ * @ERR_CANNOT_ACCESS_DIR: error for 'permission denied'
  * @ERR_FAILURE_TO_OPEN_DIR: error for 'failure to open directory'
  */
 
@@ -78,7 +78,7 @@ int error_handler(errorCode_t error, ...);
 /* PRINT_MANAGER */
 
 int print_single_dir(dir_lister_t *parser, const char *path);
-int print_multi_input_dirs(dir_lister_t *parser,
-						   int argc, char **argv);
+int print_multi_inputs(dir_lister_t *parser,
+					   int argc, char **argv);
 
 #endif

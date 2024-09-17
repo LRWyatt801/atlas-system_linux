@@ -5,40 +5,42 @@
 #include <stdio.h>
 
 /**
- * set_flags -
+ * set_flags - sets a bit map for given CL input flags
+ * @parser: pointer to dir_lister_t struct, contains pointers to DIR
+ *			and current_entry
+ * @argc: number of CL inputs
+ * @argv: matrix of CL inputs
  */
 
-void set_flags(dir_lister_t *parser, int argc, char **args)
+void set_flags(dir_lister_t *parser, int argc, char **argv)
 {
 	int i = 0;
+
 	parser->flags = 0;
 	parser->num_dirs = 0;
 
 	for (; i < argc; i++)
 	{
-		if ((args[i][0]) == '-')
+		if ((argv[i][0]) == '-')
 		{
 			int pos = 1;
-			while (args[i][pos] != '\0')
+
+			while (argv[i][pos] != '\0')
 			{
-				switch (args[i][pos])
+				switch (argv[i][pos])
 				{
 				case '1':
 					parser->flags |= 1; /* 00000001 = 1*/
 					break;
-
 				case 'a':
 					parser->flags |= 1 << 1; /* 00000010 = 2*/
 					break;
-
 				case 'A':
 					parser->flags |= 1 << 2; /* 00000100 = 4 */
 					break;
-
 				case 'l':
 					parser->flags |= 1 << 3; /* 00001000  = 8 */
 					break;
-
 				default:
 					break;
 				}
@@ -57,7 +59,7 @@ void set_flags(dir_lister_t *parser, int argc, char **args)
 /**
  * main - entry point for 'ls' program
  * @argc: number of CL inputs
- * @argv: matrix of argument inputs
+ * @argv: matrix of CL inputs
  *
  * Return: 'EXIT_SUCCESS' or 'EXIT_FAILURE'
  */
@@ -86,7 +88,7 @@ int main(int argc, char **argv)
 		if (print_single_dir(&parser, directory_path) == -1)
 			return (EXIT_FAILURE);
 	}
-	else if (print_multi_input_dirs(&parser, argc, argv) == -1)
+	else if (print_multi_inputs(&parser, argc, argv) == -1)
 		return (EXIT_FAILURE);
 
 	return (EXIT_SUCCESS);
