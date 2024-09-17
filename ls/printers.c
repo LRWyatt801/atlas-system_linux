@@ -19,8 +19,14 @@ int print_oneperline(dir_lister_t *parser)
 
 int printall(dir_lister_t *parser)
 {
-    (void)parser;
-    printf("all\n");
+    if (!parser)
+        return (-1);
+
+    while (next_entry(parser))
+    {
+        printf("%s ", parser->current_entry->d_name);
+    }
+    printf("\n");
     return (0);
 }
 
