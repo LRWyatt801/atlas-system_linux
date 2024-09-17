@@ -82,7 +82,7 @@ int print_multi_inputs(dir_lister_t *parser,
 
 /**
  * get_flag_func - evaluates any given flags and returns func pointer
- * @flag: given flag
+ * @flags: given flag
  *
  * Return: pointer to printer function
  */
@@ -91,6 +91,9 @@ int (*get_flag_func(unsigned int flags))(dir_lister_t *)
 {
 	static const print_flags_t flag_table[] = {
 		{1, print_oneperline},
+		{2, printall},
+		{4, printAll_notcurnt},
+		{8, printlongformat},
 		{0, print_dir}};
 	int i = 0;
 

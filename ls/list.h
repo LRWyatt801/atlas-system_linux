@@ -44,7 +44,7 @@ typedef struct dir_lister_s
 /**
  * struct print_flags_s - struct for managing the different CL flags
  * @flag_value: the decimal value of each flag
- * @print_func: function pointer to correct printer
+ * @printer: function pointer to correct printer
  */
 
 typedef struct print_flags_s
@@ -98,5 +98,8 @@ int (*get_flag_func(unsigned int flags))(dir_lister_t *);
 /* PRINTERS */
 
 int print_oneperline(dir_lister_t *parser);
+int printall(dir_lister_t *parser);
+int printAll_notcurnt(dir_lister_t *parser);
+int printlongformat(dir_lister_t *parser);
 
 #endif
