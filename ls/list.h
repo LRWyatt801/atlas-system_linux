@@ -102,4 +102,6 @@ int printall(dir_lister_t *parser);
 int printAll_notcurnt(dir_lister_t *parser);
 int printlongformat(dir_lister_t *parser);
 
+int _strcmp(char *s1, char *s2);
+
 #endif
