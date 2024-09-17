@@ -91,5 +91,6 @@ int main(int argc, char **argv)
 	else if (print_multi_inputs(&parser, argc, argv) == -1)
 		return (EXIT_FAILURE);
 
+	printf("%d\n", parser.flags);
 	return (EXIT_SUCCESS);
 }

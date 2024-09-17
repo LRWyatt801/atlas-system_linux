@@ -16,6 +16,7 @@
 int print_single_dir(dir_lister_t *parser, const char *path)
 {
 	int filetype;
+	int (*printer)(dir_lister_t *);
 
 	filetype = check_file_type(parser, path);
 	if (filetype == ISFILE)
@@ -27,7 +28,8 @@ int print_single_dir(dir_lister_t *parser, const char *path)
 		error_handler(ERR_FAILURE_TO_OPEN_DIR, path, parser->program_name);
 		return (-1);
 	}
-	print_dir(parser); /* repalce with function pointer for flags */
+	printer = get_flag_func(parser->flags);
+	printer(parser);
 	close_dir(parser);
 
 	return (0);
@@ -47,8 +49,11 @@ int print_multi_inputs(dir_lister_t *parser,
 					   int argc, char **argv)
 {
 	const char *input_path = NULL;
+	int (*printer)(dir_lister_t *);
 	int filetype;
 	int i;
+
+	parser->flags = parser->flags % 16;
 
 	for (i = 1; i < argc; i++)
 	{
@@ -67,9 +72,35 @@ int print_multi_inputs(dir_lister_t *parser,
 			continue;
 		}
 		printf("%s:\n", input_path);
-		print_dir(parser); /*replace with function pointer for flags*/
+		printer = get_flag_func(parser->flags);
+		printer(parser);
 		printf("\n");
 		close_dir(parser);
 	}
 	return (0);
+}
+
+/**
+ * get_flag_func - evaluates any given flags and returns func pointer
+ * @flag: given flag
+ *
+ * Return: pointer to printer function
+ */
+
+int (*get_flag_func(unsigned int flags))(dir_lister_t *)
+{
+	static const print_flags_t flag_table[] = {
+		{1, print_oneperline},
+		{0, print_dir}};
+	int i = 0;
+
+	while (flag_table[i].flag_value != 0)
+	{
+		if (flag_table[i].flag_value == flags)
+		{
+			return (flag_table[i].printer); /* currect op */
+		}
+		i++;
+	}
+	return (print_dir); /* no match function */
 }

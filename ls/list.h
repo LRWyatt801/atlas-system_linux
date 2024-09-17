@@ -42,6 +42,18 @@ typedef struct dir_lister_s
 } dir_lister_t;
 
 /**
+ * struct print_flags_s - struct for managing the different CL flags
+ * @flag_value: the decimal value of each flag
+ * @print_func: function pointer to correct printer
+ */
+
+typedef struct print_flags_s
+{
+	unsigned int flag_value;
+	int (*printer)(dir_lister_t *parser);
+} print_flags_t;
+
+/**
  * enum errors - list of different error codes
  * @ERR_FILE_NOT_FOUND: error for 'file not found'
  * @ERR_CANNOT_ACCESS_DIR: error for 'permission denied'
@@ -80,5 +92,11 @@ int error_handler(errorCode_t error, ...);
 int print_single_dir(dir_lister_t *parser, const char *path);
 int print_multi_inputs(dir_lister_t *parser,
 					   int argc, char **argv);
+
+int (*get_flag_func(unsigned int flags))(dir_lister_t *);
+
+/* PRINTERS */
+
+int print_oneperline(dir_lister_t *parser);
 
 #endif
