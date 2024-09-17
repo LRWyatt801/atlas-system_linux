@@ -16,6 +16,7 @@ int print_single_dir(dir_lister_t *parser, const char *path)
 	if (directory_lister_init(parser, path) == -1)
 	{
 		error_handler(ERR_FAILURE_TO_OPEN_DIR, path, parser->program_name);
+		close_dir(parser);
 		return (-1);
 	}
 	print_dir(parser); /* repalce with function pointer for flags */
