@@ -6,8 +6,14 @@
 
 int print_oneperline(dir_lister_t *parser)
 {
-    (void)parser;
-    printf("one perline\n");
+    if (!parser)
+        return (-1);
+
+    while (next_entry(parser))
+    {
+        if (*parser->current_entry->d_name != '.')
+            printf("%s\n", parser->current_entry->d_name);
+    }
     return (0);
 }
 
