@@ -135,7 +135,7 @@ int _strcmp(char *s1, char *s2)
  * Return: legnth of string
  */
 
-int _strlen(char *s)
+int _strlen(const char *s)
 {
     int i;
 

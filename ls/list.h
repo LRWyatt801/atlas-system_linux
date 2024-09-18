@@ -130,6 +130,6 @@ int longlistfmt_init(longlistfmt_t *longlist,
 					 struct stat *statbuf);
 void longlistfmt_print(longlistfmt_t *longlist);
 int _strcmp(char *s1, char *s2);
-int _strlen(char *s);
+int _strlen(const char *s);
 
 #endif
