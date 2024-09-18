@@ -105,7 +105,7 @@ void longlistfmt_print(longlistfmt_t *longlist)
            longlist->group,
            longlist->size,
            /* trimming the \n off of ctime string */
-           (int)strlen(longlist->modified) - 1,
+           (int)_strlen(longlist->modified) - 1,
            longlist->modified,
            longlist->entry_name);
 }
@@ -126,4 +126,23 @@ int _strcmp(char *s1, char *s2)
         if (*s1 == '\0')
             return (0);
     return (*s1 - *s2);
+}
+
+/**
+ * _strlen - prints the length of a string
+ * @s: pointer for string
+ *
+ * Return: legnth of string
+ */
+
+int _strlen(char *s)
+{
+    int i;
+
+    i = 0;
+
+    while (s[i] != '\0')
+        i++;
+
+    return (i);
 }

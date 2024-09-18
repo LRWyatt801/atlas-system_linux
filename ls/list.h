@@ -122,7 +122,6 @@ int print_longlistfmt(dir_lister_t *parser);
 
 /* HELPERS */
 
-int _strcmp(char *s1, char *s2);
 const char *dirent_type_name(unsigned char d_type);
 const char *path_join(const char *dirpath, const char *entry_name);
 int mode_to_str(char *buf, mode_t mode);
@@ -130,5 +129,7 @@ int longlistfmt_init(longlistfmt_t *longlist,
 					 const char *entry_name,
 					 struct stat *statbuf);
 void longlistfmt_print(longlistfmt_t *longlist);
+int _strcmp(char *s1, char *s2);
+int _strlen(char *s);
 
 #endif
