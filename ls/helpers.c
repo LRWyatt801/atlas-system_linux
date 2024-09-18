@@ -52,7 +52,7 @@ int mode_to_str(char *buf, mode_t mode)
     mode_t pmask, i;
 
     /* maps the file-type bits to a value 0-15 */
-    *buf++ = FTYPE_ALPHAMAP[(mode & S_IFMT) >> 12];
+    *buf++ = FTYPE_ALPHAMAP[(mode & __S_IFMT) >> 12];
 
     /* masks read permissions of owner first */
     pmask = S_IRUSR;
@@ -108,4 +108,22 @@ void longlistfmt_print(longlistfmt_t *longlist)
            (int)strlen(longlist->modified) - 1,
            longlist->modified,
            longlist->entry_name);
+}
+
+/**
+ * _strcmp - compares two strings
+ * @s1: string to compare
+ * @s2: string to compare
+ *
+ * Return: 0 if s1 == s2
+ *	   - value if s1 < s2
+ *	   + value if s1 > s2
+ */
+
+int _strcmp(char *s1, char *s2)
+{
+    for (; *s1 == *s2; s1++, s2++)
+        if (*s1 == '\0')
+            return (0);
+    return (*s1 - *s2);
 }

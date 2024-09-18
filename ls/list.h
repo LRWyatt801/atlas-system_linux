@@ -117,6 +117,7 @@ int (*get_flag_func(unsigned int flags))(dir_lister_t *);
 int print_oneperline(dir_lister_t *parser);
 int printall(dir_lister_t *parser);
 int printAll_notcurnt(dir_lister_t *parser);
+int longlistfmt_entry_init(dir_lister_t *parser);
 int print_longlistfmt(dir_lister_t *parser);
 
 /* HELPERS */

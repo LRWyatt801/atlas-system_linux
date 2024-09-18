@@ -48,6 +48,20 @@ int printAll_notcurnt(dir_lister_t *parser)
     return (0);
 }
 
+int longlistfmt_entry_init(dir_lister_t *parser)
+{
+    if (!parser)
+        return (-1);
+
+    while (next_entry(parser))
+    {
+        if (*parser->current_entry->d_name != '.')
+            print_longlistfmt(parser);
+    }
+
+    return (0);
+}
+
 int print_longlistfmt(dir_lister_t *parser)
 {
     struct stat statbuf;
