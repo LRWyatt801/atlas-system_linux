@@ -43,7 +43,7 @@ const char *dirent_type_name(unsigned char d_type)
 
 const char *path_join(const char *dirpath, const char *entry_name)
 {
-    snprintf(PATH_BUF, PATH_MAX, "%s/%s", dirpath, entry_name);
+    sprintf(PATH_BUF, "%s/%s", dirpath, entry_name);
     return (PATH_BUF);
 }
 
