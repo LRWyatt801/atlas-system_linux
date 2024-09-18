@@ -48,29 +48,20 @@ int printAll_notcurnt(dir_lister_t *parser)
     return (0);
 }
 
-int printlongformat(dir_lister_t *parser)
+int print_longlistfmt(dir_lister_t *parser)
 {
-    (void)parser;
-    printf("long format\n");
+    struct stat statbuf;
+    longlistfmt_t longlist;
+    const char *entry_name = NULL;
+    const char *entry_path = NULL;
+
+    entry_name = parser->current_entry->d_name;
+    entry_path = path_join(parser->path, entry_name);
+
+    if (lstat(entry_path, &statbuf) == -1)
+        return (-1);
+
+    longlistfmt_init(&longlist, entry_name, &statbuf);
+    longlistfmt_print(&longlist);
     return (0);
-}
-
-/***** STRING TOOLS *****/
-
-/**
- * _strcmp - compares two strings
- * @s1: string to compare
- * @s2: string to compare
- *
- * Return: 0 if s1 == s2
- *	   - value if s1 < s2
- *	   + value if s1 > s2
- */
-
-int _strcmp(char *s1, char *s2)
-{
-    for (; *s1 == *s2; s1++, s2++)
-        if (*s1 == '\0')
-            return (0);
-    return (*s1 - *s2);
 }

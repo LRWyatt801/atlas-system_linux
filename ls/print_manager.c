@@ -93,7 +93,7 @@ int (*get_flag_func(unsigned int flags))(dir_lister_t *)
 		{1, print_oneperline},
 		{2, printall},
 		{4, printAll_notcurnt},
-		{8, printlongformat},
+		{8, print_longlistfmt},
 		{0, print_dir}};
 	int i = 0;
 

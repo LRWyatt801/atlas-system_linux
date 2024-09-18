@@ -3,6 +3,7 @@
 
 #include <dirent.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 /****** MACROS ******/
 
@@ -40,6 +41,22 @@ typedef struct dir_lister_s
 	struct dirent *current_entry;
 	int stop;
 } dir_lister_t;
+
+/**
+ * struct longlistfmt - supplies all info needed for long format
+ *
+ */
+
+typedef struct longlistfmt
+{
+	char mode[16];
+	nlink_t nlinks;
+	const char *user;
+	const char *group;
+	off_t size;
+	const char *modified;
+	const char *entry_name;
+} longlistfmt_t;
 
 /**
  * struct print_flags_s - struct for managing the different CL flags
@@ -100,8 +117,17 @@ int (*get_flag_func(unsigned int flags))(dir_lister_t *);
 int print_oneperline(dir_lister_t *parser);
 int printall(dir_lister_t *parser);
 int printAll_notcurnt(dir_lister_t *parser);
-int printlongformat(dir_lister_t *parser);
+int print_longlistfmt(dir_lister_t *parser);
+
+/* HELPERS */
 
 int _strcmp(char *s1, char *s2);
+const char *dirent_type_name(unsigned char d_type);
+const char *path_join(const char *dirpath, const char *entry_name);
+int mode_to_str(char *buf, mode_t mode);
+int longlistfmt_init(longlistfmt_t *longlist,
+					 const char *entry_name,
+					 struct stat *statbuf);
+void longlistfmt_print(longlistfmt_t *longlist);
 
 #endif
