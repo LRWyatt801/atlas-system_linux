@@ -105,7 +105,7 @@ void longlistfmt_print(longlistfmt_t *longlist)
            longlist->group,
            longlist->size,
            /* trimming the \n off of ctime string */
-           (int)_strlen(longlist->modified) - 1,
+           (int)_strlen(longlist->modified) - 6,
            longlist->modified,
            longlist->entry_name);
 }
