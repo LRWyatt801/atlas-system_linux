@@ -1,5 +1,6 @@
 # Custom ignores
 *-main.c
+elf_files
 
 # Prerequisites
 *.d
