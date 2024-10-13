@@ -1,9 +1,3 @@
-# Custom ignores
-*-main.c
-elf_files
-proc_filesystem/test
-readelf/0-hreadelf
-
 # Prerequisites
 *.d
 
@@ -56,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Custom ignores
+*-main.c
+elf_files
+proc_filesystem/test
+readelf/0-hreadelf
