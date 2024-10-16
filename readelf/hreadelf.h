@@ -50,4 +50,9 @@ typedef struct elf_fmgr_s
 elf_fmgr_t *open_file(char *filename);
 void elf_close(elf_fmgr_t *filemgr);
 
+/* PRINT_MGR.C */
+
+void print_elf_hdr(elf_fmgr_t *filemgr);
+char *getelfosabi(elf_fmgr_t *elf_file);
+
 #endif /*HREADELF_H*/

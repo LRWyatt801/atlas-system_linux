@@ -17,6 +17,7 @@ int main(int argc, char **argv)
     if (elf_file->elfheader.v64->e_ident[EI_CLASS] == ELFCLASS64)
         printf("class is 64bit\n");
 
+    print_elf_hdr(elf_file);
     elf_close(elf_file);
     return (EXIT_SUCCESS);
 }
