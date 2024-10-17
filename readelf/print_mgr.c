@@ -65,14 +65,10 @@ void print_elf_hdr(elf_fmgr_t *elf_file)
 	for (i = 0; i < 16; i++)
 		printf("%02x ", elf_file->elfheader.v64->e_ident[i]);
 	printf("\n");
-	printf("  Class:                             %s\n",
-		   ELFCLASS(elf_file));
-	printf("  Data:                              %s\n",
-		   ELFDATA(elf_file));
-	printf("  Version:                           %s\n",
-		   ELFVERSION(elf_file));
-	printf("  OS/ABI:                            %s\n",
-		   getelfosabi(elf_file));
+	printf("  Class:                             %s\n", ELFCLASS(elf_file));
+	printf("  Data:                              %s\n", ELFDATA(elf_file));
+	printf("  Version:                           %s\n", ELFVERSION(elf_file));
+	printf("  OS/ABI:                            %s\n", getelfosabi(elf_file));
 	printf("  ABI Version:                       %d\n",
 		   ELFABIVERSION(elf_file));
 	printf("  Type:                              %s\n",
@@ -124,36 +120,21 @@ char *getelfosabi(elf_fmgr_t *elf_file)
 
 	switch (osabi)
 	{
-		case ELFOSABI_SYSV:
-			return ("UNIX - System V");
-		case ELFOSABI_HPUX:
-			return ("UNIX - HP-UX");
-		case ELFOSABI_NETBSD:
-			return ("UNIX - NetBSD");
-		case ELFOSABI_LINUX:
-			return ("UNIX - Linux");
-		case ELFOSABI_SOLARIS:
-			return ("UNIX - Solaris");
-		case ELFOSABI_AIX:
-			return ("UNIX - AIX");
-		case ELFOSABI_IRIX:
-			return ("UNIX - IRIX");
-		case ELFOSABI_FREEBSD:
-			return ("UNIX - FreeBSD");
-		case ELFOSABI_TRU64:
-			return ("UNIX - TRU64");
-		case ELFOSABI_MODESTO:
-			return ("Novell - Modesto");
-		case ELFOSABI_OPENBSD:
-			return ("UNIX - OpenBSD");
-		case ELFOSABI_ARM_AEABI:
-			return ("ARM EABI");
-		case ELFOSABI_ARM:
-			return ("ARM");
-		case ELFOSABI_STANDALONE:
-			return ("Standalone App");
-		default:
-			return ("<unknown: 53>");
+		case ELFOSABI_SYSV: return ("UNIX - System V");
+		case ELFOSABI_HPUX: return ("UNIX - HP-UX");
+		case ELFOSABI_NETBSD: return ("UNIX - NetBSD");
+		case ELFOSABI_LINUX: return ("UNIX - Linux");
+		case ELFOSABI_SOLARIS: return ("UNIX - Solaris");
+		case ELFOSABI_AIX: return ("UNIX - AIX");
+		case ELFOSABI_IRIX: return ("UNIX - IRIX");
+		case ELFOSABI_FREEBSD: return ("UNIX - FreeBSD");
+		case ELFOSABI_TRU64: return ("UNIX - TRU64");
+		case ELFOSABI_MODESTO: return ("Novell - Modesto");
+		case ELFOSABI_OPENBSD: return ("UNIX - OpenBSD");
+		case ELFOSABI_ARM_AEABI: return ("ARM EABI");
+		case ELFOSABI_ARM: return ("ARM");
+		case ELFOSABI_STANDALONE: return ("Standalone App");
+		default: return ("<unknown: 53>");
 	}
 }
 
@@ -212,45 +193,25 @@ char *getelfmachine(elf_fmgr_t *elf_file)
 
 	switch (machine)
 	{
-		case EM_NONE:
-			return ("No machine");
-		case EM_M32:
-			return ("AT&T WE 32100");
-		case EM_SPARC:
-			return ("SPARC");
-		case EM_386:
-			return ("Intel 80386");
-		case EM_68K:
-			return ("Motorola 68000");
-		case EM_88K:
-			return ("Motorola 88000");
-		case EM_860:
-			return ("Intel 80860");
-		case EM_MIPS:
-			return ("MIPS RS3000");
-		case EM_PARISC:
-			return ("HP/PA");
-		case EM_SPARC32PLUS:
-			return ("SPARC with enhanced instruction set");
-		case EM_PPC:
-			return ("PowerPC");
-		case EM_PPC64:
-			return ("PowerPC 64-bit");
-		case EM_S390:
-			return ("IBM S390");
-		case EM_ARM:
-			return ("ARM");
-		case EM_SH:
-			return ("Renesas SuperH");
-		case EM_SPARCV9:
-			return ("SPARC v9 64-bit");
-		case EM_IA_64:
-			return ("Intel IA-64");
-		case EM_X86_64:
-			return ("Advanced Micro Devices X86-64");
-		case EM_VAX:
-			return ("VAX");
-		default:
-			return ("Unknown machine");
+		case EM_NONE: return ("No machine");
+		case EM_M32: return ("AT&T WE 32100");
+		case EM_SPARC: return ("SPARC");
+		case EM_386: return ("Intel 80386");
+		case EM_68K: return ("Motorola 68000");
+		case EM_88K: return ("Motorola 88000");
+		case EM_860: return ("Intel 80860");
+		case EM_MIPS: return ("MIPS RS3000");
+		case EM_PARISC: return ("HP/PA");
+		case EM_SPARC32PLUS: return ("SPARC with enhanced instruction set");
+		case EM_PPC: return ("PowerPC");
+		case EM_PPC64: return ("PowerPC 64-bit");
+		case EM_S390: return ("IBM S390");
+		case EM_ARM: return ("ARM");
+		case EM_SH: return ("Renesas SuperH");
+		case EM_SPARCV9: return ("SPARC v9 64-bit");
+		case EM_IA_64: return ("Intel IA-64");
+		case EM_X86_64: return ("Advanced Micro Devices X86-64");
+		case EM_VAX: return ("VAX");
+		default: return ("Unknown machine");
 	}
 }
