@@ -244,7 +244,7 @@ char *getelfmachine(elf_fmgr_t *elf_file)
 		case EM_IA_64:
 			return ("Intel IA-64");
 		case EM_X86_64:
-			return ("AMD x86-64");
+			return ("Advanced Micro Devices x86-64");
 		case EM_VAX:
 			return ("VAX");
 		default:
