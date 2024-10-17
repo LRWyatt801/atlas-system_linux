@@ -54,5 +54,7 @@ void elf_close(elf_fmgr_t *filemgr);
 
 void print_elf_hdr(elf_fmgr_t *filemgr);
 char *getelfosabi(elf_fmgr_t *elf_file);
+char *getelftype(elf_fmgr_t *elf_file);
+char *getelfmachine(elf_fmgr_t *elf_file);
 
 #endif /*HREADELF_H*/

@@ -13,10 +13,6 @@ int main(int argc, char **argv)
     elf_file = open_file(argv[1]);
     if (!elf_file)
         return (EXIT_FAILURE);
-    printf("elf_file opened\n");
-    if (elf_file->elfheader.v64->e_ident[EI_CLASS] == ELFCLASS64)
-        printf("class is 64bit\n");
-
     print_elf_hdr(elf_file);
     elf_close(elf_file);
     return (EXIT_SUCCESS);
