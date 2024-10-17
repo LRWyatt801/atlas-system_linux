@@ -11,48 +11,48 @@
 
 elf_fmgr_t *open_file(char *fpath)
 {
-    elf_fmgr_t *open_elf = NULL;
-    void *fmap;
-    struct stat statbuff;
-    int fd;
+	elf_fmgr_t *open_elf = NULL;
+	void *fmap;
+	struct stat statbuff;
+	int fd;
 
-    if (!fpath)
-        return (NULL);
+	if (!fpath)
+		return (NULL);
 
-    fd = open(fpath, O_RDONLY);
-    if (fd == -1)
-    {
-        perror("open");
-        return (NULL);
-    }
-    if (fstat(fd, &statbuff) == -1)
-    {
-        perror("fstat");
-        close(fd);
-        return (NULL);
-    }
-    fmap = mmap(NULL, statbuff.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
-    if (fmap == MAP_FAILED)
-    {
-        perror("mmap");
-        close(fd);
-        return (NULL);
-    }
+	fd = open(fpath, O_RDONLY);
+	if (fd == -1)
+	{
+		perror("open");
+		return (NULL);
+	}
+	if (fstat(fd, &statbuff) == -1)
+	{
+		perror("fstat");
+		close(fd);
+		return (NULL);
+	}
+	fmap = mmap(NULL, statbuff.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+	if (fmap == MAP_FAILED)
+	{
+		perror("mmap");
+		close(fd);
+		return (NULL);
+	}
 
-    open_elf = malloc(sizeof(elf_fmgr_t));
-    if (open_elf == NULL)
-    {
-        perror("malloc");
-        munmap(fmap, statbuff.st_size);
-        close(fd);
-        return (NULL);
-    }
+	open_elf = malloc(sizeof(elf_fmgr_t));
+	if (open_elf == NULL)
+	{
+		perror("malloc");
+		munmap(fmap, statbuff.st_size);
+		close(fd);
+		return (NULL);
+	}
 
-    open_elf->elfheader.addr = fmap;
-    open_elf->fd = fd;
-    open_elf->fsize = statbuff.st_size;
+	open_elf->elfheader.addr = fmap;
+	open_elf->fd = fd;
+	open_elf->fsize = statbuff.st_size;
 
-    return (open_elf);
+	return (open_elf);
 }
 
 /**
@@ -64,10 +64,10 @@ elf_fmgr_t *open_file(char *fpath)
 
 void elf_close(elf_fmgr_t *filemgr)
 {
-    if (!filemgr)
-        return;
+	if (!filemgr)
+		return;
 
-    munmap(filemgr->elfheader.addr, filemgr->fsize);
-    close(filemgr->fd);
-    free(filemgr);
+	munmap(filemgr->elfheader.addr, filemgr->fsize);
+	close(filemgr->fd);
+	free(filemgr);
 }

@@ -3,9 +3,9 @@
 #define ELFCLASS(elf_file) ((elf_file)->class == 1 ? "ELF32" : "ELF64")
 #define ELFDATA(elf_file) ((elf_file)->class == ELFCLASS32 ? \
 		((elf_file)->elfheader.v32->e_ident[EI_DATA] == ELFDATA2LSB ? \
-			"2's complement, little-endian" : "2's complement, big-endian") : \
+			"2's complement, little endian" : "2's complement, big endian") : \
 		((elf_file)->elfheader.v64->e_ident[EI_DATA] == ELFDATA2LSB ? \
-			"2's complement, little-endian" : "2's complement, big-endian"))
+			"2's complement, little endian" : "2's complement, big endian"))
 #define ELFVERSION(elf_file) \
 	((elf_file)->class == ELFCLASS32 ? \
 		((elf_file)->elfheader.v32->e_ident[EI_VERSION] == EV_CURRENT ? \
@@ -114,45 +114,46 @@ void print_elf_hdr(elf_fmgr_t *elf_file)
 char *getelfosabi(elf_fmgr_t *elf_file)
 {
 	unsigned char osabi;
+
 	if (!elf_file)
-		return NULL;
-	
+		return (NULL);
+
 	osabi = (elf_file->class == ELFCLASS32 ? \
-		elf_file->elfheader.v32->e_ident[EI_OSABI] : \
-		elf_file->elfheader.v64->e_ident[EI_OSABI]);
-	
-	switch(osabi)
+			 elf_file->elfheader.v32->e_ident[EI_OSABI] : \
+			 elf_file->elfheader.v64->e_ident[EI_OSABI]);
+
+	switch (osabi)
 	{
 		case ELFOSABI_SYSV:
-            return "UNIX - System V";
-        case ELFOSABI_HPUX:
-            return "UNIX - HP-UX";
-        case ELFOSABI_NETBSD:
-            return "UNIX - NetBSD";
-        case ELFOSABI_LINUX:
-            return "UNIX - Linux";
-        case ELFOSABI_SOLARIS:
-            return "UNIX - Solaris";
-        case ELFOSABI_AIX:
-            return "UNIX - AIX";
-        case ELFOSABI_IRIX:
-            return "UNIX - IRIX";
-        case ELFOSABI_FREEBSD:
-            return "UNIX - FreeBSD";
-        case ELFOSABI_TRU64:
-            return "UNIX - TRU64";
-        case ELFOSABI_MODESTO:
-            return "Novell - Modesto";
-        case ELFOSABI_OPENBSD:
-            return "UNIX - OpenBSD";
-        case ELFOSABI_ARM_AEABI:
-            return "ARM EABI";
-        case ELFOSABI_ARM:
-            return "ARM";
-        case ELFOSABI_STANDALONE:
-            return "Standalone App";
-        default:
-            return "Unknown OS/ABI";
+			return ("UNIX - System V");
+		case ELFOSABI_HPUX:
+			return ("UNIX - HP-UX");
+		case ELFOSABI_NETBSD:
+			return ("UNIX - NetBSD");
+		case ELFOSABI_LINUX:
+			return ("UNIX - Linux");
+		case ELFOSABI_SOLARIS:
+			return ("UNIX - Solaris");
+		case ELFOSABI_AIX:
+			return ("UNIX - AIX");
+		case ELFOSABI_IRIX:
+			return ("UNIX - IRIX");
+		case ELFOSABI_FREEBSD:
+			return ("UNIX - FreeBSD");
+		case ELFOSABI_TRU64:
+			return ("UNIX - TRU64");
+		case ELFOSABI_MODESTO:
+			return ("Novell - Modesto");
+		case ELFOSABI_OPENBSD:
+			return ("UNIX - OpenBSD");
+		case ELFOSABI_ARM_AEABI:
+			return ("ARM EABI");
+		case ELFOSABI_ARM:
+			return ("ARM");
+		case ELFOSABI_STANDALONE:
+			return ("Standalone App");
+		default:
+			return ("Unknown OS/ABI");
 	}
 }
 
@@ -166,18 +167,19 @@ char *getelfosabi(elf_fmgr_t *elf_file)
 char *getelftype(elf_fmgr_t *elf_file)
 {
 	unsigned short type;
+
 	if (!elf_file)
-		return NULL;
+		return (NULL);
 
 	type = (elf_file->class == ELFCLASS32 ? \
-		elf_file->elfheader.v32->e_type : \
-		elf_file->elfheader.v64->e_type);
+			elf_file->elfheader.v32->e_type : \
+			elf_file->elfheader.v64->e_type);
 
-	switch(type)
+	switch (type)
 	{
 		case ET_NONE:
-            return ("NONE (No file type)");
-        case ET_REL:
+			return ("NONE (No file type)");
+		case ET_REL:
 			return ("REL (Relocatable file)");
 		case ET_EXEC:
 			return ("EXEC (Executable file)");
@@ -200,14 +202,15 @@ char *getelftype(elf_fmgr_t *elf_file)
 char *getelfmachine(elf_fmgr_t *elf_file)
 {
 	unsigned short machine;
+
 	if (!elf_file)
-		return NULL;
+		return (NULL);
 
 	machine = (elf_file->class == ELFCLASS32 ? \
-		elf_file->elfheader.v32->e_machine : \
-		elf_file->elfheader.v64->e_machine);
+			   elf_file->elfheader.v32->e_machine : \
+			   elf_file->elfheader.v64->e_machine);
 
-	switch(machine)
+	switch (machine)
 	{
 		case EM_NONE:
 			return ("No machine");
