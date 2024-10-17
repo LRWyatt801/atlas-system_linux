@@ -82,7 +82,7 @@ void print_elf_hdr(elf_fmgr_t *elf_file)
 	printf("  Version:                           0x%01x\n",
 		   ELFVERSIONINBIT(elf_file));
 	printf("  Entry point address:               0x%lx\n",
-		   ELFENTRYPOINT(elf_file));
+		   (unsigned long)ELFENTRYPOINT(elf_file));
 	printf("  Start of program headers:          %lu (bytes into file)\n",
 		   ELFPROGRAMOFFSET(elf_file));
 	printf("  Start of section headers:          %lu (bytes into file)\n",

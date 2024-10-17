@@ -13,6 +13,7 @@ int main(int argc, char **argv)
     elf_file = open_file(argv[1]);
     if (!elf_file)
         return (EXIT_FAILURE);
+    elf_file->class = elf_file->elfheader.v32->e_ident[EI_CLASS];
     print_elf_hdr(elf_file);
     elf_close(elf_file);
     return (EXIT_SUCCESS);
