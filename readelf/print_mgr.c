@@ -61,7 +61,7 @@ void print_elf_hdr(elf_fmgr_t *elf_file)
 	int i;
 
 	printf("ELF Header:\n");
-	printf("  Magic: ");
+	printf("  Magic:   ");
 	for (i = 0; i < 16; i++)
 		printf("%02x ", elf_file->elfheader.v64->e_ident[i]);
 	printf("\n");
