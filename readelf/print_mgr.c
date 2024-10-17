@@ -3,9 +3,9 @@
 #define ELFCLASS(elf_file) ((elf_file)->class == 1 ? "ELF32" : "ELF64")
 #define ELFDATA(elf_file) ((elf_file)->class == ELFCLASS32 ? \
 		((elf_file)->elfheader.v32->e_ident[EI_DATA] == ELFDATA2LSB ? \
-			"Two's complement, little-endian" : "Two's complement, big-endian") : \
+			"2's complement, little-endian" : "2's complement, big-endian") : \
 		((elf_file)->elfheader.v64->e_ident[EI_DATA] == ELFDATA2LSB ? \
-			"Two's complement, little-endian" : "Two's complement, big-endian"))
+			"2's complement, little-endian" : "2's complement, big-endian"))
 #define ELFVERSION(elf_file) \
 	((elf_file)->class == ELFCLASS32 ? \
 		((elf_file)->elfheader.v32->e_ident[EI_VERSION] == EV_CURRENT ? \
@@ -61,45 +61,45 @@ void print_elf_hdr(elf_fmgr_t *elf_file)
 	int i;
 
 	printf("ELF Header:\n");
-	printf("\tMagic: ");
+	printf("  Magic: ");
 	for (i = 0; i < 16; i++)
 		printf("%02x ", elf_file->elfheader.v64->e_ident[i]);
 	printf("\n");
-	printf("\tClass:                             %s\n",
+	printf("  Class:                             %s\n",
 		   ELFCLASS(elf_file));
-	printf("\tData:                              %s\n",
+	printf("  Data:                              %s\n",
 		   ELFDATA(elf_file));
-	printf("\tVersion:                           %s\n",
+	printf("  Version:                           %s\n",
 		   ELFVERSION(elf_file));
-	printf("\tOS/ABI:                            %s\n",
+	printf("  OS/ABI:                            %s\n",
 		   getelfosabi(elf_file));
-	printf("\tABI Version:                       %d\n",
+	printf("  ABI Version:                       %d\n",
 		   ELFABIVERSION(elf_file));
-	printf("\tType:                              %s\n",
+	printf("  Type:                              %s\n",
 		   getelftype(elf_file));
-	printf("\tMachine:                           %s\n",
+	printf("  Machine:                           %s\n",
 		   getelfmachine(elf_file));
-	printf("\tVersion:                           0x%01x\n",
+	printf("  Version:                           0x%01x\n",
 		   ELFVERSIONINBIT(elf_file));
-	printf("\tEntry point address:               0x%lx\n",
+	printf("  Entry point address:               0x%lx\n",
 		   ELFENTRYPOINT(elf_file));
-	printf("\tStart of program headers:          %lu (bytes into file)\n",
+	printf("  Start of program headers:          %lu (bytes into file)\n",
 		   ELFPROGRAMOFFSET(elf_file));
-	printf("\tStart of section headers:          %lu (bytes into file)\n",
+	printf("  Start of section headers:          %lu (bytes into file)\n",
 		   ELFSECOFFSET(elf_file));
-	printf("\tFlags:                             0x%x\n",
+	printf("  Flags:                             0x%x\n",
 		   ELFFLAGS(elf_file));
-	printf("\tSize of this header:               %d (bytes)\n",
+	printf("  Size of this header:               %d (bytes)\n",
 		   ELFSIZEOFHDR(elf_file));
-	printf("\tSize of program headers:           %d (bytes)\n",
+	printf("  Size of program headers:           %d (bytes)\n",
 		   ELFSIZEPRGHDRS(elf_file));
-	printf("\tNumber of program headers:         %d\n",
+	printf("  Number of program headers:         %d\n",
 		   ELFNUMPRGHDRS(elf_file));
-	printf("\tSize of section headers:           %d (bytes)\n",
+	printf("  Size of section headers:           %d (bytes)\n",
 		   ELFSIZESECHDRS(elf_file));
-	printf("\tNumber of section headers:         %d\n",
+	printf("  Number of section headers:         %d\n",
 		   ELFNUMSECHDRS(elf_file));
-	printf("\tSection header string table index: %d\n",
+	printf("  Section header string table index: %d\n",
 		   SECHDRSTRTABLE(elf_file));
 
 }
