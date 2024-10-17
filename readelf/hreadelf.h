@@ -30,10 +30,10 @@ typedef union elf_hdr_u
 
 /**
  * struct elf_fmgr_s - a Struct containing necessary variables for ELF File
+ * @elfheader: ELF header
+ * @fsize: size of file
  * @class: Class of ELF file
  * @fd: file descriptor for open file
- * @class: class identifier for elfheader
- * @fd: file descriptor for elf file
  */
 
 typedef struct elf_fmgr_s
