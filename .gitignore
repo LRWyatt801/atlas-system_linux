@@ -56,3 +56,4 @@ dkms.conf
 elf_files
 proc_filesystem/test
 readelf/0-hreadelf
+libasm/test_files
