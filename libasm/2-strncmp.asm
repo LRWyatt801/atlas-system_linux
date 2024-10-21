@@ -12,9 +12,9 @@ section .text
            ;    return (*s1 - *s2);
            ; }
 
-global asm_strcmp       ; export asm_strcmp
+global asm_strncmp       ; export asm_strcmp
 
-asm_strcmp: ; Label for function
+asm_strncmp: ; Label for function
     ; setting up stack frame
     push    rbp
     mov     rbp, rsp
