@@ -24,10 +24,10 @@ asm_strchr:
     movzx   eax, byte[rdi]
 
     ; check for null byte
-    cmp     eax, 0
+    cmp     al, 0
     jz      .done
     ; cmp char to int
-    cmp     eax, esi
+    cmp     al, sil
     je      .found
     inc     rdi
     jmp     .loop
