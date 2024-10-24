@@ -21,7 +21,7 @@ asm_strchr:
 
 .loop:
     ; move char to ax
-    movzx   eax, byte[rdi]
+    mov   al, byte[rdi]
 
     ; check for null byte
     cmp     al, 0
