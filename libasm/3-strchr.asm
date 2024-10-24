@@ -16,6 +16,9 @@ asm_strchr:
     xor     rax, rax                    ; returning address needs rax
     xor     rcx, rcx
 
+    cmp     rsi, 0
+    jz      .done
+
 .loop:
     ; move char to ax
     movzx   eax, byte[rdi]
