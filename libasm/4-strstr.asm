@@ -13,8 +13,8 @@ asm_strstr:
     xor     rax, rax
     xor     rcx, rcx
 
-    cmp     rsi, 0
-    jz      .done
+    cmp     byte[rsi], 0
+    jz      .return_haystack
 
 .haystack_loop:
     mov     al, byte[rdi]
@@ -59,6 +59,10 @@ asm_strstr:
 
 .needle_not_found:
     xor     rax, rax
+    jmp     .done
+
+.return_haystack:
+    mov     rax, rdi
     jmp     .done
 
 .done:
