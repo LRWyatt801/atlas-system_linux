@@ -34,4 +34,4 @@ asm_memcpy:
     mov     rax, rdi
     mov     rsp, rbp
     pop     rbp
-    ret    
+    ret
