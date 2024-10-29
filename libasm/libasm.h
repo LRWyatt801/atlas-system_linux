@@ -5,6 +5,7 @@
 
 /****** Prototypes ******/
 
+void *asm_memcpy(void *dest, const void *src, size_t n);
 char *asm_strchr(const char *s, int c);
 int asm_strcmp(const char *s1, const char *s2);
 size_t asm_strlen(const char *str);
