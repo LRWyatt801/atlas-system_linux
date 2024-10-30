@@ -11,10 +11,15 @@ asm_strpbrk:
     push    rbp
     mov     rbp, rsp
 
+    xor     rax, rax
+
     ;check for null arguments
     cmp     rdi, 0
     jz      .done
     cmp     rsi, 0
+    jz      .done
+    mov     bl, byte[rsi]
+    cmp     bl, 0
     jz      .done
 
     push    rsi
