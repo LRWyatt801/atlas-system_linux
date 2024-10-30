@@ -25,9 +25,9 @@ asm_strcasecmp:
 
     ; check for '\0'
     cmp     al, 0
-    jz      .done
+    jz      .greater_than
     cmp     bl, 0
-    jz      .done
+    jz      .less_than
 
     ; convert to lowercase
     and     al, 0dfh
@@ -47,8 +47,11 @@ asm_strcasecmp:
     jmp     .done
 
 .greater_than:
+    cmp     bl, 0
+    jz      .done
     mov     rax, 1
     jmp     .done
+
 
 .done:
     ; breakdown stack frame
