@@ -24,7 +24,7 @@ asm_strpbrk:
     mov     al, byte[rdi]
     cmp     al, 0
     jz      .done
-    jmp     .reject_loop
+    jmp     .accept_loop
 
 .s_loop:
     inc     rdi
@@ -32,7 +32,7 @@ asm_strpbrk:
     cmp     al, 0
     je      .done
     mov     rsi, [rsp]
-    jmp     .reject_loop
+    jmp     .accept_loop
 
 .accept_loop:
     mov     bl, byte[rsi]
