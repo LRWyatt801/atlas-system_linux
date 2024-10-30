@@ -11,6 +11,7 @@ size_t asm_puts(const char *str);
 char *asm_strchr(const char *s, int c);
 int asm_strcasecmp(const char *s1, const char *s2);
 int asm_strcmp(const char *s1, const char *s2);
+size_t asm_strcspn(const char *s, const char *reject);
 size_t asm_strlen(const char *str);
 int asm_strncasecmp(const char *s1, const char *s2, size_t n);
 int asm_strncmp(const char *s1, const char *s2, size_t n);
