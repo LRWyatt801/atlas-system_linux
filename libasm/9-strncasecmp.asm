@@ -1,13 +1,13 @@
 BITS 64
 
 section .text
-    global asm_strcasecmp
-    ; int asm_strcasecmp(const char *s1, const char *s2);
+    global asm_strncasecmp
+    ; int asm_strncasecmp(const char *s1, const char *s2);
     ; rdi == s1
     ; rsi == s2
     ; rdx == n
 
-asm_strcasecmp:
+asm_strncasecmp:
     ; set up stack frame
     push    rbp
     mov     rbp, rsp
