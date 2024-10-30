@@ -43,13 +43,15 @@ asm_strcasecmp:
     jmp     .cmp_loop
 
 .less_than:
-    mov     rax, -1
+    sub     al, bl
+    movzx   rax, al
     jmp     .done
 
 .greater_than:
     cmp     bl, 0
     jz      .done
-    mov     rax, 1
+    sub     al, bl
+    movzx   rax, al
     jmp     .done
 
 
