@@ -24,6 +24,8 @@ asm_strcspn:
 
     ;set up for first char in s
     mov     al, byte[rdi]
+    cmp     al, 0
+    jz      .done
     jmp     .reject_loop
 
 .s_loop:
