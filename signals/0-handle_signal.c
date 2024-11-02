@@ -10,6 +10,7 @@
 void signal_message(int sig)
 {
 	printf("Gotcha! [%d]\n", sig);
+	fflush(stdout);
 }
 
 /**
