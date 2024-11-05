@@ -4,13 +4,14 @@
 #include <signal.h>
 #include <unistd.h>
 
-static volatile sig_atomic_t signal_recieved = 0;
+static sig_atomic_t signal_recieved;
 
 /**
  * sigint_handler - handles the SIGINT signal
  *
  * @signum: signal number
  */
+
 void sigint_handler(int signum)
 {
 	printf("Caught %d\n", signum);
@@ -32,7 +33,7 @@ int main(void)
 	sigemptyset(&act.sa_mask);
 	if (sigaction(SIGINT, &act, NULL) == -1)
 		return (EXIT_FAILURE);
-	
+
 	pause();
 
 	if (signal_recieved)
