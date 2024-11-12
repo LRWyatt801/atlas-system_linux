@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <sys/mman.h>
 
 
 /****** STRUCTS ******/
@@ -41,5 +43,15 @@ typedef struct elf_fmngr_s
 } elf_fmngr_t;
 
 /****** PROTOTYPES ******/
+
+typedef void (*sym_action_t)(elf_fmngr_t *reader, Elf64_Sym *symbol);
+typedef int (*sym_filter_t)(elf_fmngr_t *reader, Elf64_Sym *symbol);
+
+/* FILE_MNGR.C */
+
+int init_fmngr(elf_fmngr_t *elf_fmngr);
+void SymbolReader_ProcessSymbols(elf_fmngr_t *reader, sym_action_t action,
+	sym_filter_t filter);
+void close_mapped_file(elf_fmngr_t *elf_fmngr);
 
 #endif /* _HNM_H */
