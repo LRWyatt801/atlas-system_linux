@@ -59,3 +59,4 @@ readelf/0-hreadelf
 libasm/test_files
 signals/test_files
 nm_objdump/hnm
+0x08_CPython/1-test_lists.py
