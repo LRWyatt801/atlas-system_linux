@@ -120,7 +120,7 @@ void print_python_float(PyObject *p)
 	if (fmod(value, 1.0) == 0.0 && fabs(value) <= 1000000.0)
 		printf("  value: %.1f\n", value);
 	else if (fabs(value) >= 1000000.0)
-		printf("  value: %.16e\n", value);
+		printf("  value: %.15e\n", value);
 	else
 		printf("  value: %.16g\n", value);
 	fflush(stdout);
