@@ -117,9 +117,9 @@ void print_python_float(PyObject *p)
 	float_obj = (PyFloatObject *)p;
 	value = float_obj->ob_fval;
 	printf("[.] float object info\n");
-	if (fmod(value, 1.0) == 0.0 && fabs(value) <= 10000000000000.0)
+	if (fmod(value, 1.0) == 0.0 && fabs(value) <= 9492307816406286)
 		printf("  value: %.1f\n", value);
-	else if (fabs(value) >= 10000000000000.0)
+	else if (fabs(value) > 9492307816406286)
 		printf("  value: %.15e\n", value);
 	else
 		printf("  value: %.16g\n", value);
