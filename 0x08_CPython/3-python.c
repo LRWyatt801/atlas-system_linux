@@ -26,9 +26,8 @@ void print_python_list(PyObject *p)
 		return;
 	}
 
-	size = PyList_Size(p);
-
 	list = (PyListObject *)p;
+	size = list->ob_base.ob_size;
 	allocated = list->allocated;
 
 	printf("[*] Python list info\n");
