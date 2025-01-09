@@ -34,7 +34,6 @@ int main(int argc, char **argv)
 	else
 		parent_function(child_pid);
 
-	printf("you've made it this far\n");
 	return (0);
 }
 
