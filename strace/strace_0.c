@@ -1,17 +1,20 @@
 #include "strace_hdr.h"
 #include "syscalls.h"
+#include <stdio.h>
+#include <sys/ptrace.h>
 #include <sys/wait.h>
+#include <sys/user.h>
+#include <sys/syscall.h>
 
 /**
 * main - starting point for strace_0 program
 * @argc: count of arguments passed into main
 * @argv: vector of argument strings passed into main
-* @env: environment variables passed into main
 *
 * Return: 0 on success, otherwise -1
 **/
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	if (argc == 1)
 	{
@@ -43,11 +46,15 @@ int main (int argc, char **argv)
 * Return: 0 on success, -1 on failure
 **/
 
-int child_function (char *cmd_path, char **cmd_args)
+int child_function(char *cmd_path, char **cmd_args)
 {
 	char **environ = {NULL};
 
-	printf("print from child\n");
+	if (ptrace(PTRACE_TRACEME, 0, NULL, NULL) != 0)
+	{
+		printf("traceme error\n");
+		return (-1);
+	}
 	if (execve(cmd_path, cmd_args, environ) != 0)
 	{
 		printf("execve error\n");
@@ -63,9 +70,30 @@ int child_function (char *cmd_path, char **cmd_args)
 * Return: 0 on success, otherwise -1
 **/
 
-int parent_function (pid_t child_pid)
+int parent_function(pid_t child_pid)
 {
-	int status;
-	waitpid(child_pid, &status, 0);
+	int status, start = 0;
+	struct user_regs_struct regs;
+
+	while(1)
+	{
+		waitpid(child_pid, &status, 0);
+		if (WIFEXITED(status))
+			break;
+		if (WIFSTOPPED(status))
+		{
+			ptrace(PTRACE_GETREGS, child_pid, NULL, &regs);
+			if (start == 0)
+			{
+				printf("%llu\n", regs.orig_rax);
+				start = 1;
+			}
+			else if (start == 1)
+				start = 0;
+		}
+		ptrace(PTRACE_SYSCALL, child_pid, NULL, NULL);
+	}
+
 	return (0);
 }
+
