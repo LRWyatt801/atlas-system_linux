@@ -121,7 +121,7 @@ void get_syscall_info(struct user_regs_struct *registers, int entry)
 			printf(" = ?\n");
 	}
 	else /* exit for each syscall */
-		printf(" = %#llx\n", registers->rax);
+		printf(") = %#llx\n", registers->rax);
 }
 
 /**
@@ -157,8 +157,6 @@ void print_params(struct user_regs_struct *registers, syscall_t const *syscall_i
 					printf("%#llx", registers->r8); break;
 				case(6):
 					printf("%#llx", registers->r9); break;
-				default:
-					printf("??????");
 			}
 			if (i < param_count)
 				printf(", ");
@@ -167,7 +165,5 @@ void print_params(struct user_regs_struct *registers, syscall_t const *syscall_i
 	/* print for 0 params */
 	else
 		printf("0");
-
-	printf(")"); /* print closing parathenses */
 }
 
