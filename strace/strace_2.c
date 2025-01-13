@@ -115,5 +115,5 @@ void get_syscall_info(struct user_regs_struct *registers, int entry)
 			printf("%s", syscall_info->name);
 	}
 	else
-		printf(" = %llx\n", registers->rax);
+		printf(" = %#llx\n", registers->rax);
 }
