@@ -115,10 +115,10 @@ void get_syscall_info(struct user_regs_struct *registers, int entry)
 
 		/* print return for execve */
 		if (registers->orig_rax == 59)
-			printf(" = 0\n");
+			printf(") = 0\n");
 		/* print return for exit_group */
 		else if (registers->orig_rax == 231)
-			printf(" = ?\n");
+			printf(") = ?\n");
 	}
 	else /* exit for each syscall */
 		printf(") = %#llx\n", registers->rax);
