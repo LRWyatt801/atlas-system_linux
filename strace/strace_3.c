@@ -163,9 +163,11 @@ void print_params(struct user_regs_struct *registers, syscall_t const *syscall_i
 			if (i < param_count)
 				printf(", ");
 		}
-	printf(")"); /* print closing parathenses */
 	}
 	/* print for 0 params */
 	else
-		printf("(0)");
+		printf("0");
+
+	printf(")"); /* print closing parathenses */
 }
+
