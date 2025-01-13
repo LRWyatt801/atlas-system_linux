@@ -65,3 +65,6 @@ nm_objdump/hnm
 0x08_CPython/4-test.py
 0x08_CPython/5-tests.py
 strace/strace_0
+strace/strace_1
+strace/strace_2
+strace/strace_3
