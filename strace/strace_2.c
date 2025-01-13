@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <sys/ptrace.h>
 #include <sys/wait.h>
-#include <sys/user.h>
 
 /**
 * main - starting point for strace_0 program
@@ -79,11 +78,7 @@ int parent_function(pid_t child_pid)
 
 		ptrace(PTRACE_GETREGS, child_pid, 0, &registers);
 
-		/* first entry and then every true entry */
-		if (entry == 0 || entry % 2 != 0)
-		{
-			get_syscall_name(registers.orig_rax);
-		}
+		get_syscall_info(&registers, entry);
 
 		/* handle entry and exit, check above counts entry */
 		if (ptrace(PTRACE_SYSCALL, child_pid, 0, 0) == -1)
@@ -98,17 +93,27 @@ int parent_function(pid_t child_pid)
 /**
 * get_syscall_name - gets the same of a syscall using the syscall number
 * @syscall_num: number of syscall
+* @entry: number of PTRACE_SYSCALL entry and exit
+*	  Used to track entry and exit
 *
 * Return: n/a
 */
 
-void get_syscall_name(unsigned long syscall_num)
+void get_syscall_info(struct user_regs_struct *registers, int entry)
 {
 	syscall_t const *syscall_info;
 
-	syscall_info = &syscalls_64_g[syscall_num];
-	printf("%s", syscall_info->name);
+	if (entry == 0 || entry % 2 != 0)
+	{
+		syscall_info = &syscalls_64_g[registers->orig_rax];
 
-	if (syscall_num != 1)
-		printf("\n");
+		if (registers->orig_rax == 59)
+			printf("%s = 0\n", syscall_info->name);
+		else if (registers->orig_rax == 231)
+			printf("%s = ?\n", syscall_info->name);
+		else
+			printf("%s", syscall_info->name);
+	}
+	else
+		printf(" = %llx\n", registers->rax);
 }
