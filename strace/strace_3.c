@@ -160,7 +160,7 @@ void print_params(struct user_regs_struct *registers, syscall_t const *syscall_i
 				default:
 					printf("??????");
 			}
-			if (i < param_count - 1)
+			if (i < param_count)
 				printf(", ");
 		}
 	printf(")"); /* print closing parathenses */
