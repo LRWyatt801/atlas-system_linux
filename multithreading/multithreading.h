@@ -69,5 +69,6 @@ typedef struct blur_portion_s
 /* PROTOTYPES */
 
 void *thread_entry(void *);
+int tprintf(char const *format, ...);
 
 #endif /* MULTITHREADING_H */
