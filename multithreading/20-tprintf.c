@@ -19,7 +19,7 @@ static void init_mutex(void)
 }
 
 /**
-* destroy_mutex
+* destroy_mutex - destroys mutex
 *
 * Return: n/a
 **/
