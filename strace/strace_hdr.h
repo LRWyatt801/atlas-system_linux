@@ -8,7 +8,7 @@
 
 /***** PROTOTYPES *****/
 
-int child_function(char *, char **);
+int child_function(char *, char **, char **);
 int parent_function(pid_t);
 void get_syscall_name(unsigned long int);
 void get_syscall_info(struct user_regs_struct *, int);

@@ -15,7 +15,7 @@ void print_params(struct user_regs_struct *registers, syscall_t const *syscall_i
 * Return: 0 on success, otherwise -1
 **/
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
 	if (argc == 1)
 	{
@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 		return (-1);
 	}
 	else if (child_pid == 0)
-		child_function(argv[1], &argv[1]);
+		child_function(argv[1], &argv[1], env);
 	else
 		parent_function(child_pid);
 
@@ -46,14 +46,14 @@ int main(int argc, char **argv)
 * Return: 0 on success, -1 on failure
 **/
 
-int child_function(char *cmd_path, char **cmd_args)
+int child_function(char *cmd_path, char **cmd_args, char **env)
 {
 	if (ptrace(PTRACE_TRACEME, 0, NULL, NULL) != 0)
 	{
 		printf("traceme error\n");
 		return (-1);
 	}
-	if (execvp(cmd_path, cmd_args) != 0)
+	if (execve(cmd_path, cmd_args, env) != 0)
 	{
 		printf("execve error\n");
 		return (-1);
