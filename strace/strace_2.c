@@ -50,7 +50,7 @@ int child_function(char *cmd_path, char **cmd_args, char **env)
 		printf("traceme error\n");
 		return (-1);
 	}
-	if (execvp(cmd_path, cmd_args) != 0)
+	if (execve(cmd_path, cmd_args, env) != 0)
 	{
 		printf("execve error\n");
 		return (-1);
