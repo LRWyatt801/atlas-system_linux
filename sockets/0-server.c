@@ -1,8 +1,8 @@
-#include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/socket.h>
 #include <unistd.h>
+
+#include "sockets.h"
 
 #define PORT 12345
 #define QUEUE_LIMIT 5
