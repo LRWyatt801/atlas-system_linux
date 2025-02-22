@@ -12,6 +12,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/***** MACROS *****/
+
+#define BUFF_SIZE 1024
 
 /***** STRUCTS *****/
 
@@ -37,5 +40,6 @@ typedef struct ConnectionInfo_s
 
 void init_server(ConnectionInfo_t *);
 void server_connect(ConnectionInfo_t *);
+void recv_data(ConnectionInfo_t);
 
 #endif /* SOCKETS_H */
