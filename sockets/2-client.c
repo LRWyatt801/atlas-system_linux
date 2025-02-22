@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("USAGE: %s <host> <port>\n", argv[0]);
+		printf("Usage: %s <host> <port>\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	printf("Connected to %s: %s\n", argv[1], argv[2]);
+	printf("Connected to %s:%s\n", argv[1], argv[2]);
 
 	close(conn.client_fd);
 	exit(EXIT_SUCCESS);
