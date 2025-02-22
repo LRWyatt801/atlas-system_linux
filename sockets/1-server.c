@@ -18,31 +18,8 @@ int main(void)
 	ConnectionInfo_t conn;
 
 	/* create socket */
-	if (init_server(&conn) != 1)
-		exit(EXIT_FAILURE);
-
-	if (listen(conn.server_fd, QUEUE_LIMIT) != 0)
-	{
-		perror("listen error");
-		close(conn.server_fd);
-		exit(EXIT_FAILURE);
-	}
-
-	printf("Server listening on port %d\n", PORT);
-
-	conn.client_addr_len = sizeof(conn.client_addr);
-	conn.client_fd = accept(conn.server_fd,
-			       (struct sockaddr *)&conn.client_addr,
-			       &conn.client_addr_len);
-	if (conn.client_fd < 0)
-	{
-		perror("accept error");
-		close(conn.client_fd);
-		close(conn.server_fd);
-		exit(EXIT_FAILURE);
-
-	}
-	printf("Client connected: %s\n", inet_ntoa(conn.client_addr.sin_addr));
+	init_server(&conn);
+	server_connect(&conn);
 	exit(EXIT_SUCCESS);
 }
 
@@ -50,10 +27,10 @@ int main(void)
 * init_server - initializes a socket for a server
 * @conn: a struct containing info needed for socket connections
 *
-* Return: 1 on success, otherwise -1
+* Return: n/a
 */
 
-int init_server(ConnectionInfo_t *conn)
+void init_server(ConnectionInfo_t *conn)
 {
 	conn->server_fd = socket(PF_INET, SOCK_STREAM, 0);
 	if (conn->server_fd < 0)
@@ -75,6 +52,37 @@ int init_server(ConnectionInfo_t *conn)
 		close(conn->server_fd);
 		exit(EXIT_FAILURE);
 	}
+}
 
-	return (1);
+/**
+* server_connect - set the server to listen and connect
+* @conn: a struct containing needed info for socket connections
+*
+* Return: n/a
+*/
+
+void server_connect(ConnectionInfo_t *conn)
+{
+	if (listen(conn->server_fd, QUEUE_LIMIT) != 0)
+	{
+		perror("listen error");
+		close(conn->server_fd);
+		exit(EXIT_FAILURE);
+	}
+
+	printf("Server listening on port %d\n", PORT);
+
+	conn->client_addr_len = sizeof(conn->client_addr);
+	conn->client_fd = accept(conn->server_fd,
+			       (struct sockaddr *)&conn->client_addr,
+			       &conn->client_addr_len);
+	if (conn->client_fd < 0)
+	{
+		perror("accept error");
+		close(conn->client_fd);
+		close(conn->server_fd);
+		exit(EXIT_FAILURE);
+
+	}
+	printf("Client connected: %s\n", inet_ntoa(conn->client_addr.sin_addr));
 }

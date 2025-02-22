@@ -8,6 +8,10 @@
 #include <sys/un.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 
 /***** STRUCTS *****/
 
@@ -31,6 +35,7 @@ typedef struct ConnectionInfo_s
 
 /***** PROTOTYPES *****/
 
-int init_server(ConnectionInfo_t *);
+void init_server(ConnectionInfo_t *);
+void server_connect(ConnectionInfo_t *);
 
 #endif /* SOCKETS_H */
