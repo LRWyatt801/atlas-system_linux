@@ -15,8 +15,8 @@ void recv_data(ConnectionInfo_t conn)
 {
 	int datarecv;
 	const char *okresponse =
-		"HTTP/1.1 200 OK\r\n"
-		"^M\n";
+		"HTTP/1.1 200 OK\r\n\r\n";
+
 
 	datarecv = recv(conn.client_fd, &conn.buff, BUFF_SIZE - 1, 0);
 	if (datarecv < 0)
