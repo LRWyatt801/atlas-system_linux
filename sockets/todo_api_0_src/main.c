@@ -19,11 +19,13 @@ int main(void)
 
 	/* create socket */
 	init_server(&conn);
+	fflush(NULL);
 	while (1)
 	{
 		server_connect(&conn);
 		recv_data(conn);
 		close(conn.client_fd);
+		fflush(NULL);
 	}
 	close(conn.server_fd);
 	exit(EXIT_SUCCESS);
