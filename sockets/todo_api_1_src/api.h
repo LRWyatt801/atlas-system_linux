@@ -75,6 +75,6 @@ void init_server(ConnectionInfo_t *);
 void server_connect(ConnectionInfo_t *);
 void recv_data(ConnectionInfo_t, HttpRequest_t *);
 void parse_data(char *, HttpRequest_t *);
-void parse_queries(HttpRequest_t *);
+void parse_path(HttpRequest_t *);
 
 #endif /* API_H */

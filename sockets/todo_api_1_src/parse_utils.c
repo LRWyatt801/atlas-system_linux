@@ -22,7 +22,7 @@ void parse_data(char *buff, HttpRequest_t *request_data)
 		return;
 	}
 
-	parse_queries(request_data);
+	parse_path(request_data);
 
 	printf("Method: %s\n", request_data->method);
 	printf("Path: %s\n", request_data->path);
@@ -42,7 +42,17 @@ void parse_data(char *buff, HttpRequest_t *request_data)
 * Return: n/a
 */
 
-void parse_queries(HttpRequest_t *request_data)
+void parse_path(HttpRequest_t *request_data)
 {
-	return;
+	request_data->query_list = NULL;
+	char *querymark = strchr(request_data->fullpath, '?');
+
+	if (querymark)
+	{
+		*querymark = '\0';
+		strcpy(request_data->path, request_data->fullpath);
+		strcpy(request_data->allquery, querymark + 1);
+	}
+	else
+		strcpy(request_data->path, request_data->fullpath);
 }
