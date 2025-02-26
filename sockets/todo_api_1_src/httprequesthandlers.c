@@ -54,7 +54,7 @@ void parse_data(char *buff, HttpRequest_t *request_data)
 
 	parse_path(request_data);
 
-	printf("Method: %s\n", request_data->method);
+	/*printf("Method: %s\n", request_data->method); Uncomment for method print */
 	printf("Path: %s\n", request_data->path);
 	while (request_data->query_list)
 	{
