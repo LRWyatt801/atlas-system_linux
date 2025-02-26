@@ -96,7 +96,6 @@ void print_stuff(HttpRequest_t *request_data)
 	Httpheader_t *tmp = NULL;
 
 	/*printf("Method: %s\n", request_data->method); Uncomment for method print */
-	printf("Path: %s\n", request_data->path);
 	while (request_data->header_list)
 	{
 		tmp = request_data->header_list;
