@@ -10,7 +10,7 @@ todo_api_1: ./todo_api_1_src/main.c ./todo_api_1_src/httprequesthandlers.c ./tod
 todo_api_2: ./todo_api_2_src/main.c ./todo_api_2_src/httprequesthandlers.c ./todo_api_2_src/path_utils.c ./todo_api_2_src/header_utils.c
 	$(CC) $(CFLAGS) -o $@ $^
 
-todo_api_3: todo_api_3_src/*.c
+todo_api_3: ./todo_api_3_src/*.c
 	$(CC) $(CFLAGS) -o $@ $^
 
 todo_api_4: todo_api_4_src/*.c
