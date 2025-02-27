@@ -19,4 +19,4 @@ todo_api_4: todo_api_4_src/*.c
 todo_api_5: todo_api_5_src/*.c
 	$(CC) $(CFLAGS) -o $@ $^
 
-.PHONY: todo_api_0 todo_api_1 todo_api_2 todo_api_3
+.PHONY: todo_api_0 todo_api_1 todo_api_2 todo_api_3 todo_api_4 todo_api_5
