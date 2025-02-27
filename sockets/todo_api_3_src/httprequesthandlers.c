@@ -99,7 +99,7 @@ void print_stuff(HttpRequest_t *request_data)
 	while (request_data->query_list)
 	{
 		tmp = request_data->query_list;
-		printf("Body: \"%s\" -> \"%s\"\n", tmp->key, tmp->value);
+		printf("Body param: \"%s\" -> \"%s\"\n", tmp->key, tmp->value);
 		request_data->query_list = tmp->next;
 		free(tmp);
 	}
