@@ -1,3 +1,4 @@
+![image](https://github.com/LRWyatt801/lrwyatt801.github.io/blob/main/assets/img/portfolio/readelf/header.png)
 # Atlas System Linux
 
 A repository containing projects for learning about the Linux system 
